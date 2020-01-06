@@ -1,13 +1,13 @@
 {
-    "name": "jacobbennett/sendyphp",
+    "name": "chrisnesbit1/wpsendyphp",
     "description": "A PHP Library for interfacing with the Sendy newsletter system (http://sendy.co)",
     "keywords": ["sendy", "newsletter"],
     "license": "MIT",
     "authors": [
         {
-            "email": "me@jakebennett.net", 
-            "name": "Jacob Bennett",
-            "homepage": "http://jakebennett.net"
+            "email": "chris@chrisanesbit.com", 
+            "name": "Chris Nesbit",
+            "homepage": "https://chrisanesbit.com"
         }
     ],
     "require": {
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SendyPHP\\": "src/"
+            "WPSendyPHP\\": "src/"
         }
     }
 }
