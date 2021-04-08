@@ -229,24 +229,23 @@ class SendyPHP
 
         //Merge the passed in values with the options for return
         $content = array_merge($values, $return_options);
-
+        
         //build a query using the $content
         $postdata = http_build_query($content);
-
-        $ch = curl_init($this->installation_url .'/'. $type);
-
-        // Settings to disable SSL verification for testing (leave commented for production use)
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/x-www-form-urlencoded"));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
-        $result = curl_exec($ch);
-        curl_close($ch);
-
-        return $result;
+        
+        $url = $this->installation_url .'/'. $type;
+        $args = array(
+            'body' => $postdata,
+            'timeout' => '5',
+            'redirection' => '5',
+            'httpversion' => '1.0',
+            'blocking' => true,
+            'headers' => array("Content-Type: application/x-www-form-urlencoded"),
+            'cookies' => array()
+        );
+        
+        $response = wp_remote_post( $url, $args );
+        
+        return isset($response['body']) ? $response['body'] : '';
     }
 }
